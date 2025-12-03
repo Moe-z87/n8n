@@ -1,0 +1,28 @@
+app = "n8n-moe"
+primary_region = "fra"
+
+[env]
+  N8N_PORT = "5678"
+  N8N_HOST = "0.0.0.0"
+  N8N_PROTOCOL = "https"
+  WEBHOOK_URL = "https://n8n-moe.fly.dev/"
+  N8N_ENDPOINT_REST = "rest"
+  N8N_SECURE_COOKIE = "false"
+  N8N_USER_MANAGEMENT_DISABLED = "true"
+
+[[services]]
+  protocol = "tcp"
+  internal_port = 5678
+
+  [[services.ports]]
+    port = 80
+    handlers = ["http"]
+
+  [[services.ports]]
+    port = 443
+    handlers = ["tls", "http"]
+
+  [[services.tcp_checks]]
+    interval = "10s"
+    timeout = "3s"
+    grace_period = "60s"
